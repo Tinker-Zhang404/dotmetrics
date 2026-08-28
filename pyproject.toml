@@ -40,8 +40,8 @@ dev = [
 dotmetrics = "dotmetrics.app:main"
 
 [project.urls]
-Repository = "https://github.com/Tinker-Zhang404/dotmetrics-tem"
-Issues = "https://github.com/Tinker-Zhang404/dotmetrics-tem/issues"
+Repository = "https://github.com/Tinker-Zhang404/dotmetrics"
+Issues = "https://github.com/Tinker-Zhang404/dotmetrics/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
