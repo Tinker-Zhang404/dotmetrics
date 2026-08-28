@@ -1,0 +1,51 @@
+﻿[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dotmetrics"
+version = "1.0.0"
+description = "Desktop software for calibrated particle-size analysis of TEM images."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+keywords = ["TEM", "nanoparticles", "particle sizing", "computer vision", "YOLO"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "opencv-python>=4.9",
+    "Pillow>=10.2",
+    "PySide6>=6.7",
+    "scipy>=1.12",
+    "ultralytics>=8.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "PyInstaller>=6.6",
+    "pytest>=8.0",
+    "pytest-qt>=4.4",
+]
+
+[project.scripts]
+dotmetrics = "dotmetrics.app:main"
+
+[project.urls]
+Repository = "https://github.com/Tinker-Zhang404/dotmetrics-tem"
+Issues = "https://github.com/Tinker-Zhang404/dotmetrics-tem/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
