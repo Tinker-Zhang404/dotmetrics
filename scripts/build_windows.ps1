@@ -1,8 +1,16 @@
+param(
+    [string]$PythonExecutable = ""
+)
+
 $ErrorActionPreference = "Stop"
 
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $repositoryRoot
-$pythonExecutable = (Get-Command python).Source
+if ([string]::IsNullOrWhiteSpace($PythonExecutable)) {
+    $PythonExecutable = (Get-Command python).Source
+} else {
+    $PythonExecutable = (Resolve-Path -LiteralPath $PythonExecutable).Path
+}
 $basePrefix = (& $pythonExecutable -c "import sys; print(sys.base_prefix)").Trim()
 $configRoot = Join-Path $repositoryRoot ".ultralytics"
 New-Item -ItemType Directory -Force -Path (Join-Path $configRoot "Ultralytics") | Out-Null
@@ -32,5 +40,14 @@ foreach ($document in @(
 )) {
     Copy-Item -LiteralPath (Join-Path $repositoryRoot $document) -Destination $distributionRoot -Force
 }
+
+Copy-Item `
+    -LiteralPath (Join-Path $repositoryRoot "examples") `
+    -Destination (Join-Path $distributionRoot "examples") `
+    -Recurse `
+    -Force
+
+& (Join-Path $PSScriptRoot "create_release_manifest.ps1") `
+    -DistributionRoot $distributionRoot
 
 Write-Host "DotMetrics build completed: $repositoryRoot\dist\DotMetrics"

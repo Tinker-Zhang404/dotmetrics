@@ -38,7 +38,19 @@ The release is not presented as a reliable method for separating heavily overlap
 6. The operator reviews contours, excludes inappropriate detections, and may add clearly identified manual diameter lines.
 7. DotMetrics exports measurements, figures, settings, and audit information together.
 
-## Quick Start
+## Download the Windows Application
+
+Most Windows users do not need Python. Download `DotMetrics-v1.0.0-Windows-x64.zip` from the [v1.0.0 release](https://github.com/Tinker-Zhang404/dotmetrics/releases/tag/v1.0.0), then:
+
+1. Extract the complete ZIP archive to a writable directory.
+2. Keep `DotMetrics.exe` and the adjacent `_internal` directory together.
+3. Open `DotMetrics.exe`.
+4. Wait until the status reads `Detector: ready`.
+5. Open one of the files in the bundled `examples` directory or use your own TEM image.
+
+Do not run the EXE from inside the ZIP archive, and do not move the EXE without its `_internal` directory.
+
+## Install from Source
 
 DotMetrics requires Git and Python 3.11 or later. The release has been verified on Windows. In PowerShell:
 
@@ -84,6 +96,22 @@ Detailed instructions are in [USER_GUIDE.md](USER_GUIDE.md).
 
 Manual lines and automated contour measurements remain distinguishable in the exported report. Excluding a detection does not alter the original TEM image.
 
+## Example Images
+
+Three TEM images are included in [`examples`](examples) for learning the calibration and analysis workflow:
+
+| File | Format | Visible scale bar |
+| --- | --- | ---: |
+| [`TEM_Example_01.jpg`](examples/TEM_Example_01.jpg) | JPEG, 641 x 640 | 5 nm |
+| [`TEM_Example_02.tif`](examples/TEM_Example_02.tif) | TIFF, 2048 x 2048 | 20 nm |
+| [`TEM_Example_03.tif`](examples/TEM_Example_03.tif) | TIFF, 2048 x 2048 | 20 nm |
+
+![DotMetrics TEM example](examples/TEM_Example_01.jpg)
+
+These files are demonstration inputs, not a replacement for independent validation on the user's own microscope, material, and acquisition conditions. See [examples/README.md](examples/README.md) for suggested use.
+
+The Windows release archive also includes operator-generated demonstration outputs for these images. They illustrate the export format and are not asserted as ground-truth annotations.
+
 ## Exported Results
 
 Each export creates a `DotMetrics_<image-name>` directory containing:
@@ -121,6 +149,7 @@ Only load model files from trusted sources. PyTorch model files can contain seri
 ```text
 dotmetrics.py                 Source-checkout launcher
 models/                       Bundled detector weights
+examples/                     TEM images for workflow demonstration
 scripts/                      Verification and Windows build scripts
 src/dotmetrics/core/          Detection, segmentation, export, and paths
 src/dotmetrics/domain/        Measurement data models
